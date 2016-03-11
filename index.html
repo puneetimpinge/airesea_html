@@ -1,0 +1,683 @@
+<html lang="en" class="no-js js-menubar"><head>
+  <title>SeaCalc</title>
+
+  <link data-turbolinks-track="true" href="./assets/css/bootstrap.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/bootstrap-extend.min.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/dataTables.bootstrap.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/dataTables.responsive.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/datatable.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/login.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/site.min.css" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="./assets/css/web-icons.css" media="all" rel="stylesheet">
+  <script src="./assets/jquery.js"></script>
+  <meta content="authenticity_token" name="csrf-param">
+  <meta content="H/Ws8qxEZE6YN3qXjD5QXuhGIRxhlmePves2AV/5IBrBu7lulmCBQ5k4lk2Pc6Jhg4BWvHDwDVIDF2/wssqXLw==" name="csrf-token">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <script src="./assets/breakpoints.js"></script>
+  <script>
+  Breakpoints();
+  </script>
+</head>
+<body class="site-menubar-changing site-menubar-unfold">
+
+  <nav role="navigation" class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega">
+    <div class="navbar-header">
+      <button data-toggle="menubar" class="navbar-toggle hamburger hamburger-close navbar-toggle-left hided unfolded" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <button data-toggle="collapse" data-target="#site-navbar-collapse" class="navbar-toggle collapsed" type="button">
+        <i aria-hidden="true" class="icon wb-more-horizontal"></i>
+      </button>
+      <div data-toggle="gridmenu" class="navbar-brand navbar-brand-center site-gridmenu-toggle">
+        <img width="50" height="50" title="Remark" src="/assets/airsea_logo.png" class="navbar-brand-logo">
+        <span class=" navbar-brand-text"> AirSea Packing</span>
+      </div>
+    </div>
+
+    <div class="navbar-container container-fluid">
+      <div id="site-navbar-collapse" class="collapse navbar-collapse navbar-collapse-toolbar">
+        <ul class="nav navbar-toolbar">
+          <li id="toggleMenubar" class="hidden-float">
+            <a role="button" href="#" data-toggle="menubar">
+              <i class="icon hamburger hamburger-arrow-left hided unfolded">
+                  <span class="sr-only">Toggle menubar</span>
+                  <span class="hamburger-bar"></span>
+                </i>
+            </a>
+          </li>
+          
+        </ul>
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+          <li class="dropdown">
+            <a role="button" data-animation="scale-up" aria-expanded="false" href="#" data-toggle="dropdown" class="navbar-avatar dropdown-toggle">
+              Logged in as <strong>admin</strong>
+            </a>
+          </li>
+          <li class="dropdown">
+              <a href="/users/sign_out" data-method="delete" rel="nofollow" class="navbar-avatar dropdown-toggle">Logout</a>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+
+  </nav>
+
+  <div class="site-menubar">
+    <div class="site-menubar-body">
+      <div>
+        <div>
+          <ul class="site-menu">
+            <li class="site-menu-category"></li>
+            <li class="site-menu-item has-sub client_menu">
+              <a href="/" data-method="get">
+                <i aria-hidden="true" class="site-menu-icon wb-dashboard"></i>
+                <span class="site-menu-title">Clients</span>
+              </a>
+            </li>
+            <li class="site-menu-item has-sub cal_rate_menu active_tab" style="background-color: rgb(0, 0, 0);">
+              <a href="/calculate_rates" data-method="get">
+                <i aria-hidden="true" class="site-menu-icon wb-dashboard"></i>
+                <span class="site-menu-title">Calculate Rates</span>
+              </a>
+            </li>
+            <li class="site-menu-item has-sub loc_menu">
+              <a href="/locations" data-method="get">
+                <i aria-hidden="true" class="site-menu-icon wb-dashboard"></i>
+                <span class="site-menu-title">Location</span>
+              </a>
+            </li>
+            <li class="site-menu-item has-sub base_rate_menu">
+              <a href="/base_rates" data-method="get">
+                <i aria-hidden="true" class="site-menu-icon wb-dashboard"></i>
+                <span class="site-menu-title">Base Rate</span>
+              </a>
+            </li>
+            <li class="site-menu-item has-sub quote_menu">
+              <a href="/all_quotes" data-method="get">
+                <i aria-hidden="true" class="site-menu-icon wb-dashboard"></i>
+                <span class="site-menu-title">Quotes</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(".site-menu li.cal_rate_menu").addClass('active_tab').css("background-color", "black")
+  </script>
+
+
+  <div style="display:none" id="notice" role="alert" class="alert dark alert-icon alert-success alert-dismissible marginl20"></div>
+  <div style="display:none" id="alert" role="alert" class="alert dark alert-icon alert-danger alert-dismissible marginl20"></div>
+  
+  <div style="background: none;" class="page">
+
+    <div style="padding: 10px" class="jumbotron CalculateRatesMain">
+      <div style="-webkit-box-shadow:none" class="panel ClientPanel">
+        <div class="dropdown client-dropdown">
+          <h4>Client</h4>
+          <div class="btn-group">
+            <button style="width: 170px" id="client_btn" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" value="Puneet">Puneet</button> 
+            <ul id="client_menu" class="dropdown-menu"> 
+                <li><a id="16" href="#">DavMeen</a></li>
+                <li><a id="5" href="#">testing testing </a></li>
+                <li><a id="14" href="#">yisroel2</a></li>
+                <li><a id="15" href="#">joel kraus</a></li>
+                <li><a id="2" href="#">Puneet</a></li>
+            </ul> 
+          </div>
+        </div> 
+      </div>
+
+      <div style="-webkit-box-shadow:none" class="panel TripDetalPanel">
+        <div class="row">
+          <div class="col-md-2 TripDetail">
+            <h5>Trip Details</h5>
+            <label>From</label>
+            <div class="btn-group">
+              <button id="from_btn" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" value="Dallas">Dallas</button> 
+              <ul id="from_menu" class="dropdown-menu">
+                <li><a href="#">Dallas-Houston</a></li>
+                <li><a href="#">Dallas</a></li>
+                <li><a href="#">Houston</a></li>
+                <li><a href="#">LA</a></li>
+                <li><a href="#">MIA</a></li>
+                <li><a href="#">NY</a></li>
+                <li><a href="#">SF</a></li>
+              </ul> 
+            </div><br><br>
+
+            <label>To</label>
+            <div class="btn-group">
+              <button id="to_btn" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">To 
+                <span class="caret"></span> 
+              </button> 
+              <ul id="to_menu" class="dropdown-menu">
+                <li><a href="#">LA</a></li>
+                <li><a href="#">MIA</a></li>
+                <li><a href="#">NY</a></li>
+                <li><a href="#">SF</a></li>
+              </ul> 
+            </div>
+          </div> 
+
+          <div class="col-md-2 CubilFeetDetail">
+            <h5>Dimensions in inches</h5> 
+            <div class="CubicFeetRow">
+              <label>Length</label>
+              <input type="number" value="0" id="length" min="0" class="form-control">
+            </div>
+            <div class="CubicFeetRow">
+              <label>Width</label>
+              <input type="number" value="0" id="width" min="0" class="form-control">
+            </div>
+            <div class="CubicFeetRow">
+              <label>Height</label>
+              <input type="number" value="0" id="height" min="0" class="form-control">
+            </div>
+          </div>
+
+          <div class="col-md-2 ValuationDetail"> 
+            <h5>Total Valuation</h5> 
+            <label>Amount</label>
+            <input type="number" value="0" id="valuation" min="0" class="form-control">
+          </div>
+
+          <div class="col-md-3 AddonsDetail"> 
+            <h5>Add ons</h5> 
+            <label class="AddonsLabelCheck"><input type="checkbox" id="off_route" value="">Additional delivery time from the city center</label>
+            <div class="AddonsRow hide">
+              <label>Hours</label>
+              <input type="number" value="0" id="hours" min="0" class="form-control">
+            </div>
+
+            <label class="AddonsLabelCheck"><input type="checkbox" id="item" value="">Large Glass Top or Marble</label>
+            <div class="AddonsRow hide">
+              <label>Pieces</label>
+              <input type="number" value="0" id="pieces" min="0" class="form-control">
+            </div>
+
+            <label style="width: 100%;margin-top:5px" class="AddonsLabelCheck">
+              <input type="checkbox" id="insurance" value="">Insurance
+            </label>
+          </div>
+
+          <div class="col-md-3 PackingDetail"> 
+            <h5>Packing</h5> 
+            <div class="radio">
+              <label><input type="radio" id="pre_packed" name="packing">Pre-packed</label>
+              <div class="prepacked_text hide" style="font-size: 12px;margin: 10px">
+                <b>Please enter packed item dimensions</b> 
+              </div>
+              <label><input type="radio" id="not_packed" name="packing">Not Packed</label>
+            </div>
+            
+            <div class="PackingBlockButtons">
+              <div style="font-size: 12px;margin: 10px"><b>Please select packing material required based on item’s specificities. Changes may apply.</b></div>
+              <div class="btn btn-default box_type bank_wrap" type="button">Blanket wrapped</div>
+              <div class="btn btn-default box_type light_crate" type="button">Light crate</div>
+              <div class="btn btn-default box_type cartoon" type="button">Carton</div>
+            </div>
+          </div>
+
+        </div> 
+      </div>
+
+      <div class="PanelCalculateBtn">
+        <div style="-webkit-box-shadow:none" class="panel ">
+          <center><button id="calc" class="btn btn-primary" type="button">Calculate</button></center>
+        </div>
+
+        <center><h1 id="price"></h1></center>
+        <p style="font-size: 14px">Agree to the <a target="blank" href="/terms_and_conditions.pdf">terms &amp; conditions </a></p>
+        <p style="font-size: 14px">Based on normal access, ground floor, 2 men collection &ndash; delivery, excludes walkups, hoisting.</p>
+        <p style="font-size: 14px">Based on regular business hours and consolidated service, regular working hours 9-5 M-F</p>
+        <p style="font-size: 14px">Based on domestic standards packing. It is possible our Estimated Quick Quote may change once we have your exact quote details, for a more accurate quote please <a href="mailto: quotes@airseapacking.com">contact us</a></p>
+      </div>
+      <div value="2" id="user_id"></div>
+    </div>
+
+    <script type="text/javascript">
+      $(function(){
+
+        $("#from_menu li a").click(function(){
+          $("#from_btn").text($(this).text()).val($(this).text());
+          var src = $(this)
+          var route_from = src.html()
+          var user_id = $("#user_id").attr("value")
+          $.ajax({
+            type: 'get',
+            url: '/get_to_routes',
+            data: 'route_from='+route_from+'&amp;user_id='+user_id,
+          })
+          .success(function(res) {
+            console.log("success");
+            $("#to_menu").html($(res).find(".to_data").html())
+
+            $("#to_menu li a").click(function(){
+              $("#to_btn").text($(this).text()).val($(this).text());
+            });
+          })
+        });
+
+        $("#to_menu li a").click(function(){
+          $("#to_btn").text($(this).text()).val($(this).text());
+        });
+
+        $("#calc").click(function() {
+          var route_from  = $("#from_btn").text().trim()
+          var route_to = $("#to_btn").text().trim()
+
+          var valuation = $("#valuation").val()
+          var user_id = $("#user_id").attr("value")
+          var off_route = $("#off_route").prop('checked')
+          var hours = $("#hours").val()
+          var item = $("#item").prop('checked')
+          var pieces = $("#pieces").val()
+
+          var length = parseInt($("#length").val())
+          var width = parseInt($("#width").val())
+          var height = parseInt($("#height").val())
+
+          if($($(".PackingBlockButtons .btn-primary")[0]).html() == "Blanket wrapped"){
+            var cft = ((length+2) * (width+2) * (height+2)/(12*12*12))
+          }else if($($(".PackingBlockButtons .btn-primary")[0]).html() == "Light crate"){
+            var cft = ((length+5) * (width+5) * (height+5)/(12*12*12))
+          }else if($($(".PackingBlockButtons .btn-primary")[0]).html() == "Carton"){
+            var cft = ((length+6) * (width+6) * (height+8)/(12*12*12))
+          }else{
+            var cft = (length*width*height)/(12*12*12)
+          }
+          console.log(cft)
+          if ($("#pre_packed").is(":checked")) {
+            var packing = "pre_packed"
+          }else{ 
+            var packing = "not_packed"
+          };
+          var insurance = $("#insurance").prop('checked')
+
+          if (route_from == "From"){
+            $("#alert").html("Please Select Trip From.").show()
+          }else if(route_to == "To"){
+            $("#alert").html("Please Select Trip To.").show()
+          }else if (cft == 0){
+            $("#alert").html("Please Enter correct CFT value.").show()
+          }else if(valuation == 0){
+            $("#alert").html("Please Enter correct valuation.").show()
+          }else{
+            $('#alert, #notice ').slideUp()
+            $.ajax({
+              url: '/calc_rate',
+              data: 'route_from='+route_from+'&amp;route_to='+route_to+'&amp;cft='+cft+'&amp;valuation='+valuation+'&amp;user_id='+user_id+'&amp;off_route='+off_route+'&amp;hours='+hours+'&amp;item='+item+'&amp;pieces='+pieces+'&amp;insurance='+insurance,
+            })
+            .success(function(res) {
+              console.log("success");
+              console.log(res)
+              if((parseInt(valuation) > 10000) && res.cost == 0){
+                $("#price").html("Call for Estimate")
+              }else if (res.message=="true"){
+                $("#price").html("$"+res.cost)
+              }else{
+                $("#alert").html(res.message).show()
+                setTimeout(function(){
+                  $('#alert, #notice ').slideUp()
+                }, 3000);
+              }
+            })
+            .fail(function() {
+              console.log("error");
+            })
+            
+          }
+          setTimeout(function(){
+            $('#alert, #notice ').slideUp()
+          }, 3000);
+        });
+
+          $("#client_menu li a").click(function(){
+            $("#client_btn").text($(this).text()).val($(this).text());
+            var user_id = $(this).attr('id')
+            $.ajax({
+              url: '/get_client_data',
+              data: 'user_id='+user_id,
+            })
+            .success(function(res) {
+              console.log("success");
+              $("#from_menu").html($(res).find(".from_data").html())
+              $("#user_id").attr("value", user_id)
+              $("#from_menu li a").click(function(){
+                $("#from_btn").text($(this).text()).val($(this).text());
+              });
+
+              $("#length").val("0");$("#width").val("0");$("#height").val("0");
+              $("#valuation").val("")
+              get_to_route()
+            })
+          });
+
+
+        function get_to_route(){
+          $("#from_menu li a").click(function(){
+            var src = $(this)
+            var route_from = src.html()
+            var user_id = $("#user_id").attr("value")
+            $.ajax({
+              type: 'get',
+              url: '/get_to_routes',
+              data: 'route_from='+route_from+'&amp;user_id='+user_id,
+            })
+            .success(function(res) {
+              console.log("success");
+              $("#to_menu").html($(res).find(".to_data").html())
+
+              $("#to_menu li a").click(function(){
+                $("#to_btn").text($(this).text()).val($(this).text());
+              });
+            })
+          })
+        }
+
+        $(".radio input").click(function(){
+          var radio = $(this).attr("id")
+          
+          if(radio == "not_packed"){
+            $('.PackingBlockButtons').removeClass('hide')
+            if ($("#item").prop('checked') ){
+               $($('.box_type')[1]).addClass('btn-primary') 
+            }
+            $('.prepacked_text').addClass('hide')
+          }else{
+            $(".box_type").removeClass('btn-primary')
+            $('.PackingBlockButtons').addClass('hide')
+            $('.prepacked_text').removeClass('hide')
+          }
+        })
+
+        $('.box_type').click(function(){
+          if (!$("#item").prop('checked') ){
+            $('.box_type').removeClass("btn-primary")
+            $(this).addClass("btn-primary")
+            // if($(this).hasClass('bank_wrap') ){
+            //   add_length = 2; add_width = 2 ; add_height = 2;
+            // }else if($(this).hasClass('light_crate') ){
+            //   add_length = 5; add_width = 5 ; add_height = 5;
+            // }else if($(this).hasClass('cartoon') ){
+            //   add_length = 6; add_width = 6 ; add_height = 8;
+            // }
+          }
+        })
+
+        $("#off_route").click(function() {
+          if ($("#off_route").prop('checked') ){
+            $("#hours").parent().removeClass('hide')
+          }else{
+            $("#hours").parent().addClass('hide')
+          }
+        })
+          
+        $("#item").click(function() {
+          if ($("#item").prop('checked') ){
+            $("#pieces").parent().removeClass('hide')
+            if ($("#not_packed").is(":checked")) {
+              $($('.box_type')[1]).click().addClass('btn-primary')
+              $($('.box_type')[0]).attr('disabled',true).removeClass('btn-primary')
+              $($('.box_type')[2]).attr('disabled',true).removeClass('btn-primary')
+            }
+          }else{
+            $("#pieces").parent().addClass('hide')
+            $('.box_type').removeClass("btn-primary")
+            $($('.box_type')[0]).attr('disabled',false)
+            $($('.box_type')[2]).attr('disabled',false)
+          }
+        });
+      });
+    </script>
+  </div>
+
+<script type="text/javascript">
+  $(function(){
+
+    $("#from_menu li a").click(function(){
+      $("#from_btn").text($(this).text()).val($(this).text());
+      var src = $(this)
+      var route_from = src.html()
+      var user_id = $("#user_id").attr("value")
+      $.ajax({
+        type: 'get',
+        url: '/get_to_routes',
+        data: 'route_from='+route_from+'&amp;user_id='+user_id,
+      })
+      .success(function(res) {
+        console.log("success");
+        $("#to_menu").html($(res).find(".to_data").html())
+
+        $("#to_menu li a").click(function(){
+          $("#to_btn").text($(this).text()).val($(this).text());
+        });
+      })
+    });
+
+    $("#to_menu li a").click(function(){
+      $("#to_btn").text($(this).text()).val($(this).text());
+    });
+
+    $("#calc").click(function() {
+      var route_from  = $("#from_btn").text().trim()
+      var route_to = $("#to_btn").text().trim()
+
+      var valuation = $("#valuation").val()
+      var user_id = $("#user_id").attr("value")
+      var off_route = $("#off_route").prop('checked')
+      var hours = $("#hours").val()
+      var item = $("#item").prop('checked')
+      var pieces = $("#pieces").val()
+
+      var length = parseInt($("#length").val())
+      var width = parseInt($("#width").val())
+      var height = parseInt($("#height").val())
+
+      if($($(".PackingBlockButtons .btn-primary")[0]).html() == "Blanket wrapped"){
+        var cft = ((length+2) * (width+2) * (height+2)/(12*12*12))
+      }else if($($(".PackingBlockButtons .btn-primary")[0]).html() == "Light crate"){
+        var cft = ((length+5) * (width+5) * (height+5)/(12*12*12))
+      }else if($($(".PackingBlockButtons .btn-primary")[0]).html() == "Carton"){
+        var cft = ((length+6) * (width+6) * (height+8)/(12*12*12))
+      }else{
+        var cft = (length*width*height)/(12*12*12)
+      }
+      console.log(cft)
+      if ($("#pre_packed").is(":checked")) {
+        var packing = "pre_packed"
+      }else{ 
+        var packing = "not_packed"
+      };
+      var insurance = $("#insurance").prop('checked')
+
+      if (route_from == "From"){
+        $("#alert").html("Please Select Trip From.").show()
+      }else if(route_to == "To"){
+        $("#alert").html("Please Select Trip To.").show()
+      }else if (cft == 0){
+        $("#alert").html("Please Enter correct CFT value.").show()
+      }else if(valuation == 0){
+        $("#alert").html("Please Enter correct valuation.").show()
+      }else{
+        $('#alert, #notice ').slideUp()
+        $.ajax({
+          url: '/calc_rate',
+          data: 'route_from='+route_from+'&amp;route_to='+route_to+'&amp;cft='+cft+'&amp;valuation='+valuation+'&amp;user_id='+user_id+'&amp;off_route='+off_route+'&amp;hours='+hours+'&amp;item='+item+'&amp;pieces='+pieces+'&amp;insurance='+insurance,
+        })
+        .success(function(res) {
+          console.log("success");
+          console.log(res)
+          if((parseInt(valuation) > 10000) && res.cost == 0){
+            $("#price").html("Call for Estimate")
+          }else if (res.message=="true"){
+            $("#price").html("$"+res.cost)
+          }else{
+            $("#alert").html(res.message).show()
+            setTimeout(function(){
+              $('#alert, #notice ').slideUp()
+            }, 3000);
+          }
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        
+      }
+      setTimeout(function(){
+        $('#alert, #notice ').slideUp()
+      }, 3000);
+    });
+
+      $("#client_menu li a").click(function(){
+        $("#client_btn").text($(this).text()).val($(this).text());
+        var user_id = $(this).attr('id')
+        $.ajax({
+          url: '/get_client_data',
+          data: 'user_id='+user_id,
+        })
+        .success(function(res) {
+          console.log("success");
+          $("#from_menu").html($(res).find(".from_data").html())
+          $("#user_id").attr("value", user_id)
+          $("#from_menu li a").click(function(){
+            $("#from_btn").text($(this).text()).val($(this).text());
+          });
+
+          $("#length").val("0");$("#width").val("0");$("#height").val("0");
+          $("#valuation").val("")
+          get_to_route()
+        })
+      });
+
+
+    function get_to_route(){
+      $("#from_menu li a").click(function(){
+        var src = $(this)
+        var route_from = src.html()
+        var user_id = $("#user_id").attr("value")
+        $.ajax({
+          type: 'get',
+          url: '/get_to_routes',
+          data: 'route_from='+route_from+'&amp;user_id='+user_id,
+        })
+        .success(function(res) {
+          console.log("success");
+          $("#to_menu").html($(res).find(".to_data").html())
+
+          $("#to_menu li a").click(function(){
+            $("#to_btn").text($(this).text()).val($(this).text());
+          });
+        })
+      })
+    }
+
+    $(".radio input").click(function(){
+      var radio = $(this).attr("id")
+      
+      if(radio == "not_packed"){
+        $('.PackingBlockButtons').removeClass('hide')
+        if ($("#item").prop('checked') ){
+           $($('.box_type')[1]).addClass('btn-primary') 
+        }
+        $('.prepacked_text').addClass('hide')
+      }else{
+        $(".box_type").removeClass('btn-primary')
+        $('.PackingBlockButtons').addClass('hide')
+        $('.prepacked_text').removeClass('hide')
+      }
+    })
+
+    $('.box_type').click(function(){
+      if (!$("#item").prop('checked') ){
+        $('.box_type').removeClass("btn-primary")
+        $(this).addClass("btn-primary")
+        // if($(this).hasClass('bank_wrap') ){
+        //   add_length = 2; add_width = 2 ; add_height = 2;
+        // }else if($(this).hasClass('light_crate') ){
+        //   add_length = 5; add_width = 5 ; add_height = 5;
+        // }else if($(this).hasClass('cartoon') ){
+        //   add_length = 6; add_width = 6 ; add_height = 8;
+        // }
+      }
+    })
+
+    $("#off_route").click(function() {
+      if ($("#off_route").prop('checked') ){
+        $("#hours").parent().removeClass('hide')
+      }else{
+        $("#hours").parent().addClass('hide')
+      }
+    })
+      
+    $("#item").click(function() {
+      if ($("#item").prop('checked') ){
+        $("#pieces").parent().removeClass('hide')
+        if ($("#not_packed").is(":checked")) {
+          $($('.box_type')[1]).click().addClass('btn-primary')
+          $($('.box_type')[0]).attr('disabled',true).removeClass('btn-primary')
+          $($('.box_type')[2]).attr('disabled',true).removeClass('btn-primary')
+        }
+      }else{
+        $("#pieces").parent().addClass('hide')
+        $('.box_type').removeClass("btn-primary")
+        $($('.box_type')[0]).attr('disabled',false)
+        $($('.box_type')[2]).attr('disabled',false)
+      }
+    });
+  });
+</script></div>
+  
+    
+  <script type="text/javascript">
+    $(document).ready(function(){
+      if ($('#alert').html()!="" || $('#notice').html()!=""){
+        setTimeout(function(){
+          $('#alert, #notice ').slideUp()
+        }, 3000);
+      }
+      // if($(".dataTable").hasClass("dataTable")){
+      //   $(".dataTable").dataTable()  
+      // }
+    })
+
+
+    
+  </script>
+
+<style type="text/css">
+  .marginl20{
+    margin-left: 20%
+  }
+
+  .login_alert{
+    margin-right: 18%;
+    width: 60%;
+    position: absolute;
+    margin-left: 20%
+  }
+</style>
+  <script src="./assets/jquery.js"></script>
+  <script src="./assets/bootstrap.js"></script>
+  <!-- Plugins -->
+  <script src="./assets/jquery.dataTables.js"></script>
+  <script src="./assets/dataTables.bootstrap.js"></script>
+  <script src="./assets/dataTables.responsive.js"></script>
+  <!-- Scripts -->
+  <script src="./assets/core.js"></script>
+  <script src="./assets/site.js"></script>
+  <script src="./assets/menubar.js"></script>
+  <script src="./assets/icon.js"></script>
+  <script src="./assets/datatables.js"></script>
+  <script src="./assets/datatable.js"></script>
+
+
+
+
+</body></html>

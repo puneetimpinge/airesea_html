@@ -1,0 +1,290 @@
+.page-login:before {
+  background-image: url("/assets/login.jpg");
+  opacity: 30
+}
+.page-login form {
+  width: 340px;
+  margin: 30px 0;
+}
+.page-login form a {
+  margin-left: 20px;
+}
+.TripDetalPanel{
+	width: 100%;
+	display: inline-block;
+  padding: 0 15px;
+}
+.CalculateRatesMain{
+	background-color:#fff;
+	padding:50px 20% 0;
+}
+.TripDetalPanel button{
+	width: 170px;
+}
+.ClientPanel {
+  text-align: center;
+}
+.page-header-actions.SpecificClientsButton {
+  float: right;
+  left: 0;
+  position: relative;
+  top: 0;
+  transform: none;
+  -moz-transform: none;
+  -webkit-transform: none;
+}
+.SpecificClientHeading{
+	display: inline-block;
+}
+.CalculateRatesMain .btn-group, .CalculateRatesMain .btn-group .btn {
+    width: 100%;
+
+}
+.client-dropdown .btn-group {
+  width: auto;
+
+}
+.alert.dark.alert-danger {
+
+}
+.navbar-brand {
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+.navbar-brand-logo {
+  height: auto;
+  width: 45px;
+  margin-top: 0;
+}
+.TripDetail .btn-group {
+  width: 70%;
+}
+.TripDetail label {
+  width: 27%;
+}
+.CubilFeetDetail label {
+  display: inline-block;
+  width: 40%;
+}
+.CubilFeetDetail input.form-control {
+  display: inline-block;
+  width: 57%;
+}
+.ValuationDetail label {
+  display: inline-block;
+  width: 42%;
+}
+.ValuationDetail input.form-control {
+  display: inline-block;
+  width: 55%;
+  padding: 5px;
+}
+.AddonsDetailAddonsDetail label {
+  display: inline-block;
+  width: 42%;
+}
+.AddonsDetail input.form-control {
+  display: inline-block;
+  width: 55%;
+  padding: 5px;
+}
+.TripDetail h5 {
+  margin-left: 30%;
+}
+.CubilFeetDetail h5 {
+  margin-left: 40%;
+}
+.ValuationDetail h5 {
+  margin-left: 44%;
+}
+.AddonsDetail h5, .AddonsDetail label.AddonsLabelCheck {
+  margin-left: 20%;
+}
+.TripDetalPanel label {
+  font-size: 12px;
+}
+.PackingDetail .btn {
+  width: 140px;
+  display: inherit;
+}
+.CubicFeetRow {
+  margin-bottom: 20px;
+}
+.AddonsRow {
+  margin: 0 0 30px;
+}
+.PanelCalculateBtn{
+  text-align: center;
+}
+.PanelCalculateBtn .panel {
+  display: inline-block;
+  height: auto;
+  margin-bottom: 0;
+}
+.PanelCalculateBtn .panel:first-child{
+  margin-right: 30px;
+}
+.AddonsLabelCheck > input {
+  margin: 0 5px 0 0;
+  position: relative;
+  top: 2px;
+}
+.PackingDetail .radio input {
+  margin-top: 2px;
+}
+.PackingBlockButtons .btn {
+  margin-bottom: 15px;
+}
+
+.PackingDetail .radio label{
+  width: 100%;
+}
+/* ----------------- 
+	MEDIA CSS START 
+	--------------------------- */
+@media (max-width: 1280px) {
+  .TripDetail .btn-group {
+    width: 100%;
+  }
+  .CubilFeetDetail input.form-control{
+    width: 100%;
+  }
+  .ValuationDetail input.form-control{
+    width: 100%; 
+  }
+  .TripDetail h5, .CubilFeetDetail h5, .ValuationDetail h5, .AddonsDetail h5,  .CubilFeetDetail h5{
+    margin-left: 0;
+  }
+  .AddonsDetail h5, .AddonsDetail label.AddonsLabelCheck{
+    margin-left: 0px
+  }
+}
+@media (max-width: 992px) {
+	.CalculateRatesMain{
+		padding: 50px 5% 0;
+	}
+  .AddonsDetail input.form-control{
+    width: 100%;
+  }
+  .PackingBlockButtons{
+    text-align: left;
+  }
+  .PackingDetail .radio label{
+    width: auto;
+  }
+  .PackingBlockButtons .btn.box_type {
+      display: inherit;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-login form {
+    width: auto;
+  }
+  .TripDetalPanel button{
+  	width: 100%;
+  }
+  .PackageDetailPanel .input-group{
+  	width: 100%;
+  }
+  .marginl20 {
+    margin-left: 0 !important;
+  }
+
+.navbar-brand {
+  width: auto;
+}
+}
+@media (max-width: 600px) {
+	.SpecificPageHeader{
+		text-align: center;
+	}
+	.page-header-actions.SpecificClientsButton{
+		display: inline-block;
+		float: none;
+		margin-top: 20px;
+	}
+}
+@media (max-width: 570px) {
+  .ClientListing #client_table_wrapper .row .col-sm-6 {
+    width: 50%;
+    display: inline-block;
+  }
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 {
+    width: 50%;
+    display: inline-block;
+  }
+  .panel-body.ClientListing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+}
+@media (max-width: 500px) {
+  .ClientListing #client_table_wrapper .row .col-sm-6 {
+    width: 100%;
+  }
+  
+  .ClientListing #client_table_wrapper .row .col-sm-6 #client_table_filter {
+    float: left;
+    text-align: left;
+    width: 100%;
+  }
+  .ClientListing #client_table_wrapper .row .col-sm-6 #client_table_filter label {
+    width: 100%;
+  }
+  .ClientListing #client_table_wrapper .row .col-sm-6 #client_table_filter label input {
+    width: 85%;
+  }
+
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 {
+    width: 100%;
+  }
+  
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 #user_rate_table_filter {
+    float: left;
+    text-align: left;
+    width: 100%;
+  }
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 #user_rate_table_filter label {
+    width: 100%;
+  }
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 #user_rate_table_filter label input {
+    width: 85%;
+  }
+}
+@media (max-width: 479px) {
+  /*.PackingBlockButtons {
+      text-align: left;
+  }
+  .PackingBlockButtons .btn.box_type {
+    display: inherit;
+  }*/
+}
+@media (max-width: 400px) {
+  .ClientListing #client_table_wrapper .row .col-sm-6{
+    padding: 0px;
+  }
+  .ClientListing #client_table_wrapper .row .col-sm-6 #client_table_filter label input {
+    width: 80%;
+  }
+
+  .RateListing #user_rate_table_wrapper .row .col-sm-6{
+    padding: 0px;
+  }
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 #user_rate_table_filter label input {
+    width: 80%;
+  }
+  .PackingDetail .radio label{
+    width: 100%;
+  }
+}
+@media (max-width: 320px) {
+  .ClientListing #client_table_wrapper .row .col-sm-6 #client_table_filter label input {
+    width: 75%;
+  }
+  .RateListing #user_rate_table_wrapper .row .col-sm-6 #user_rate_table_filter label input {
+    width: 75%;
+  }
+}
